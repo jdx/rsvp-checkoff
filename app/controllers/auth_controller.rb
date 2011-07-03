@@ -15,7 +15,11 @@ class AuthController < ApplicationController
   private
 
   def client
-    OAuth2::Client.new(ENV['MEETUP_APP_KEY'], ENV['MEETUP_APP_SECRET'], :authorize_url => 'https://secure.meetup.com/oauth2/authorize')
+    OAuth2::Client.new(ENV['MEETUP_APP_KEY'],
+                       ENV['MEETUP_APP_SECRET'],
+                       :authorize_url => 'https://secure.meetup.com/oauth2/authorize',
+                       :access_token_url => 'https://secure.meetup.com/oauth2/access',
+                       :access_token_method => :post)
   end
 
   def redirect_uri
