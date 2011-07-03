@@ -7,4 +7,4 @@ var RSVP = new Ext.Application({
 	html:'this is a freakin viewport'
 	
 	});
-})
+}
