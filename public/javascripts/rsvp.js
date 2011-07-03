@@ -21,6 +21,7 @@ var App = new Ext.Application({
     });
 
     userStore = new Ext.data.Store({
+      sorters: 'response',
       proxy: {
         type: 'scripttag',
         url: 'https://api.meetup.com/2/rsvps?key=387c221de2f734b2e31591d1550637d&event_id=16336453',
@@ -29,17 +30,14 @@ var App = new Ext.Application({
           'root': 'results'
         }
       },
-      fields: [
-        { name:'response', type:'string' },
-        { name:'commments', type:'string' }
-      ]
+      fields: ['response', 'member', 'member_photo', 'commments']
     });
     userStore.load();
 
     rsvpApp.views.list = new Ext.List({
       xtype: 'list',
       store: userStore,
-      itemTpl: '{response} {commments}'
+      itemTpl: '<img src="{member_photo.thumb_link}" /> {response} <br/> {member.name} {commments}'
     });
 
     rsvpApp.views.mainContainer = new Ext.Panel({
