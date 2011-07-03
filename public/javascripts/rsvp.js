@@ -31,7 +31,7 @@ var App = new Ext.Application({
       },
       fields: [
         { name:'response', type:'string' },
-        { name:'member_name', mapping:['member']['name'], type:'string' }
+        { name:'commments', type:'string' }
       ]
     });
     userStore.load();
@@ -39,7 +39,7 @@ var App = new Ext.Application({
     rsvpApp.views.list = new Ext.List({
       xtype: 'list',
       store: userStore,
-      itemTpl: '{response} {member_name}'
+      itemTpl: '{response} {commments}'
     });
 
     rsvpApp.views.mainContainer = new Ext.Panel({
