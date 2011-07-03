@@ -1,15 +1,13 @@
-require 'oauth2'
-
 class AuthController < ApplicationController
   def login
-    redirect_to client.web_server.authorize_url(
+    redirect_to meetup_client.web_server.authorize_url(
       :redirect_uri => redirect_uri
     )
   end
 
   def callback
     if params[:code]
-      access_token = client.web_server.get_access_token(params[:code], :redirect_uri => redirect_uri)
+      access_token = meetup_client.web_server.get_access_token(params[:code], :redirect_uri => redirect_uri)
       session[:access_token] = access_token.token
       redirect_to :meetups
     else
@@ -18,14 +16,6 @@ class AuthController < ApplicationController
   end
 
   private
-
-  def client
-    OAuth2::Client.new(ENV['MEETUP_APP_KEY'],
-                       ENV['MEETUP_APP_SECRET'],
-                       :authorize_url => 'https://secure.meetup.com/oauth2/authorize',
-                       :access_token_url => 'https://secure.meetup.com/oauth2/access',
-                       :access_token_method => :post)
-  end
 
   def redirect_uri
     uri = URI.parse(request.url)
