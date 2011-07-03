@@ -15,22 +15,25 @@ var App = new Ext.Application({
       window.location = 'https://secure.meetup.com/oauth2/authorize?client_id=' + client_id + '&response_type=token&redirect_uri=' + encodeURIComponent(document.URL);
     }
 
-    rsvpApp.views.mainToolbar = new Ext.Toolbar ({
+    rsvpApp.views.mainToolbar = new Ext.Toolbar({
       id: 'mainToolbar',
       title: 'RSVP List'
     });
 
-    Ext.regModel('User', {
+    userStore = new Ext.data.Store({
+      proxy: {
+        type: 'scripttag',
+        url: 'https://api.meetup.com/2/rsvps?key=387c221de2f734b2e31591d1550637d&event_id=16336453',
+        reader: {
+          'type': 'json',
+          'root': 'results'
+        }
+      },
       fields: [
-        { name: 'response', type: 'string'}
+        { name:'response', type:'string' }
       ]
     });
-
-    userStore = new Ext.data.JsonPStore({
-      model: 'User',
-      url: 'https://api.meetup.com/2/rsvps?key=387c221de2f734b2e31591d1550637d&event_id=16336453',
-      root: 'results'
-    });
+    userStore.load();
 
     rsvpApp.views.list = new Ext.List({
       xtype: 'list',
@@ -53,28 +56,3 @@ var App = new Ext.Application({
     });
   }
 });
-
-eventStore = Ext.extend(Ext.data.JsonPStore, {
-    constructor: function(cfg) {
-        cfg = cfg || {};
-        eventStore.superclass.constructor.call(this, Ext.apply({
-            storeId: 'Event',
-            url: 'https://api.meetup.com/2/rsvps?key=387c221de2f734b2e31591d1550637d&sign=true&event_id=16336453',
-            batch: true,
-            autoLoad: true,
-            root: 'results',
-            autoSave: false,
-            fields: [
-                { name: 'response', type: 'string'},
-                { name: 'name', type: 'string', mapping: '[\'member\'][\'name\']'},
-                { name: 'member_id', type: 'string', mapping: '[\'member\'][\'member_id\']'},
-                { name: 'photo thumbs', type: 'string', mapping: '[\'member_photo\'][\'thumb_link\']'},
-                { name: 'answers', type: 'string'},
-                { name: 'guests', type: 'int'},
-                { name: 'commments', type: 'string'}
-            ]
-        }, cfg));
-    }
-});
-
-new eventStore();
