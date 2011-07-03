@@ -1,6 +1,9 @@
 RsvpCheckoff::Application.routes.draw do
   match 'auth/meetup' => 'auth#login'
   match 'auth/meetup/callback' => 'auth#callback'
+  match 'home' => 'home#index'
+
+  resources :meetups
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

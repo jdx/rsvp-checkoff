@@ -8,8 +8,13 @@ class AuthController < ApplicationController
   end
 
   def callback
-    access_token = client.web_server.get_access_token(params[:code], redirect_uri => redirect_uri)
-    render :text => access_token
+    if params[:code]
+      access_token = client.web_server.get_access_token(params[:code], :redirect_uri => redirect_uri)
+      session[:access_token] = access_token.token
+      redirect_to :meetups
+    else
+      redirect_to :home
+    end
   end
 
   private
