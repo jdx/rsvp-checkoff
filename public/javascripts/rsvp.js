@@ -12,7 +12,7 @@ var App = new Ext.Application({
 	rsvpApp.views.meetupListContainer = new Ext.Panel({
 		id: 'meetupList',
 		layout: 'fit',
-		html: 'this is the meetup list container'
+		html: 'this is the meetup list container',
 		dockedItems: [rsvpApp.views.meetupToolbar]
 	});
 	
