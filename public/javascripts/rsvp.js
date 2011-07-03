@@ -4,7 +4,7 @@ var RSVP = new Ext.Application({
 	launch : function () {
 	
 	}
-})
+});
 
 launch: function () {
 
