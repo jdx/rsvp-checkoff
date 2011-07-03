@@ -18,7 +18,7 @@ rsvp.Main = {
 
     onAuthorizeButtonTap : function() {
         window.location = "/auth/meetup";
-};
+}};
 
 
 Ext.setup({
