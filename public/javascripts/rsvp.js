@@ -20,11 +20,29 @@ var App = new Ext.Application({
       title: 'RSVP List'
     });
 
+    Ext.regModel('User', {
+      fields: [
+        { name: 'response', type: 'string'}
+      ]
+    });
+
+    userStore = new Ext.data.JsonPStore({
+      model: 'User',
+      url: 'https://api.meetup.com/2/rsvps?key=387c221de2f734b2e31591d1550637d&event_id=16336453',
+      root: 'results'
+    });
+
+    rsvpApp.views.list = new Ext.List({
+      xtype: 'list',
+      store: userStore,
+      itemTpl: '{response}'
+    });
+
     rsvpApp.views.mainContainer = new Ext.Panel({
       id: 'mainList',
       layout: 'fit',
-      html: 'this is the meetup list container',
-      dockedItems: [rsvpApp.views.mainToolbar]
+      dockedItems: [rsvpApp.views.mainToolbar],
+      items: [rsvpApp.views.list]
     });
 
     rsvpApp.views.viewport = new Ext.Panel({
