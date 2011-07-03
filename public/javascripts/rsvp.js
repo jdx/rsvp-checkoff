@@ -30,7 +30,7 @@ var App = new Ext.Application({
         }
       },
       fields: [
-        { name:'response', type:'string' }
+        { name:'response', type:'string' },
         { name:'member_name', mapping:['member']['name'], type:'string' }
       ]
     });
