@@ -1,4 +1,4 @@
-Ext.ns('rsvp');
+Ext.ns('rsvp', 'Ext.ux');
 
 Ext.ux.UniversalUI = Ext.extend(Ext.Panel, {
     fullscreen: true,
