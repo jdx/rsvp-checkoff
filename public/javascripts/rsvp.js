@@ -1,4 +1,80 @@
+//temporary data store to test ui
+
+var data = {
+    text: 'Groceries',
+    items: [{
+        text: 'Drinks',
+        items: [{
+            text: 'Water',
+            items: [{
+                text: 'Sparkling',
+                leaf: true
+            },{
+                text: 'Still',
+                leaf: true
+            }]
+        },{
+            text: 'Coffee',
+            leaf: true
+        },{
+            text: 'Espresso',
+            leaf: true
+        },{
+            text: 'Redbull',
+            leaf: true
+        },{
+            text: 'Coke',
+            leaf: true
+        },{
+            text: 'Diet Coke',
+            leaf: true
+        }]
+    },{
+        text: 'Fruit',
+        items: [{
+            text: 'Bananas',
+            leaf: true
+        },{
+            text: 'Lemon',
+            leaf: true
+        }]
+    },{
+        text: 'Snacks',
+        items: [{
+            text: 'Nuts',
+            leaf: true
+        },{
+            text: 'Pretzels',
+            leaf: true
+        },{
+            text: 'Wasabi Peas',
+            leaf: true
+        }]
+    },{
+        text: 'Empty Category',
+        items: []
+    }]
+};
+Ext.regModel('ListItem', {
+    fields: [{name: 'text', type: 'string'}]
+});
+var store = new Ext.data.TreeStore({
+    model: 'ListItem',
+    root: data,
+    proxy: {
+        type: 'ajax',
+        reader: {
+            type: 'tree',
+            root: 'items'
+        }
+    }
+});
+
+//am I instantiating the UI the right way?
+
 Ext.ns('rsvp', 'Ext.ux');
+
+//here is where I assume I'm creating the UI
 
 Ext.ux.UniversalUI = Ext.extend(Ext.Panel, {
     fullscreen: true,
@@ -37,7 +113,7 @@ Ext.ux.UniversalUI = Ext.extend(Ext.Panel, {
         });
 
         this.navigationPanel = new Ext.NestedList({
-            //store: sink.StructureStore,
+            store: store,
             useToolbar: Ext.is.Phone ? false : true,
             updateTitleText: false,
             dock: 'left',
