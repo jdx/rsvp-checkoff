@@ -36,7 +36,7 @@ var App = new Ext.Application({
   }
 });
 
-eventStore = Ext.extend(Ext.data.JsonStore, {
+eventStore = Ext.extend(Ext.data.JsonPStore, {
     constructor: function(cfg) {
         cfg = cfg || {};
         eventStore.superclass.constructor.call(this, Ext.apply({
@@ -50,7 +50,7 @@ eventStore = Ext.extend(Ext.data.JsonStore, {
                 { name: 'response', type: 'string'},
                 { name: 'name', type: 'string', mapping: '[\'member\'][\'name\']'},
                 { name: 'member_id', type: 'string', mapping: '[\'member\'][\'member_id\']'},
-                { name: 'photo thumbs', type: 'string', mapping: '[\'member_photo\'][\'thumb_link\']'}
+                { name: 'photo thumbs', type: 'string', mapping: '[\'member_photo\'][\'thumb_link\']'},
                 { name: 'answers', type: 'string'},
                 { name: 'guests', type: 'int'},
                 { name: 'commments', type: 'string'}
