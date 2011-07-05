@@ -1,4 +1,4 @@
-onReady: function() {
+rsvpBuddy.controllers.authorizeCurrentUser = function() {
 var access_token = document.URL.match(/access_token=.+\b/g);
 if (access_token) {
 alert(access_token.toString().split('=')[1]);
