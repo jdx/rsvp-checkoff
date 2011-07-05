@@ -7,7 +7,7 @@ rsvpBuddy.views.Viewport = Ext.extend(Ext.Panel, {
 
         Ext.apply(this, {
             items: [
-                rsvpBuddy.views.RsvpList
+                rsvpBuddy.views.rsvpList
             ]
         });
 
