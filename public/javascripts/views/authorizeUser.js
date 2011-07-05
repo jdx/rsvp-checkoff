@@ -5,29 +5,41 @@ rsvpBuddy.views.authorizeUserList = Ext.extend(Ext.List, {
 
 });
 
-rsvpBuddy.views.authorizeUser = new Ext.Panel({
-    layout: 'fit',
-    dockedItems: [{
-        xtype: 'toolbar',
-        title: 'RSVP List'
-    }],
-    items: [new rsvpBuddy.views.authorizeUserList({
-        store: new Ext.data.Store({
-            id: 'store_tp',
-            model: 'rsvpBuddy.models.memberList',
-            autoLoad: true,
-            proxy: {
-                
-                type: 'scripttag',
-                url: 'https://api.meetup.com/2/rsvps?key=387c221de2f734b2e31591d1550637d&event_id=16336453',
-				//type: 'ajax',
-				//url:'/javascripts/models/rsvp_list_from_meetup.json',
 
-                reader: {
-                    type: 'json',
-                    root: 'results'
-                }
-            }
-        })
-    })]
+
+rsvpBuddy.views.authorizeUser = new Ext.Panel({
+    layout: {
+	type: 'vbox',
+	pack: 'center', 
+	align: 'center'
+	},
+	
+    dockedItems: [
+	{
+		dock : 'top',
+		xtype: 'toolbar',
+		title: 'RSVP Buddy'
+    }],
+
+	items: [
+	new Ext.Button(
+	                {
+		ui  : 'decline-round',
+		text: 'Touch this button to connect with Meetup.com',
+		handler : function(){
+			var access_token = document.URL.match(/access_token=.+\b/g);
+			if (access_token) {
+				alert(access_token.toString().split('=')[1]);
+				} else {
+					// User not logged in, log them in
+					var client_id = '9vjs6vdesogbvnrv6uoal3ufh9';
+					if (document.URL.indexOf('localhost') !== -1) {
+						client_id = '5olqblvb85fcckedja4uv42cgt';
+						}
+						window.location = 'https://secure.meetup.com/oauth2/authorize?client_id=' + client_id + '&response_type=token&redirect_uri=' + encodeURIComponent(document.URL);
+						}	
+					}
+					}
+					)
+				]
 });
