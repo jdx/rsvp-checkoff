@@ -4,7 +4,6 @@ rsvpBuddy.views.Viewport = Ext.extend(Ext.Panel, {
     layout: 'fit',
 
     initComponent: function() {
-	
 		var access_token = document.URL.match(/access_token=.+\b/g);
 		if (access_token) {
 			alert(access_token.toString().split('=')[1]);
@@ -14,8 +13,6 @@ rsvpBuddy.views.Viewport = Ext.extend(Ext.Panel, {
                 rsvpBuddy.views.rsvpList
             ]
         });
-
-        rsvpBuddy.views.Viewport.superclass.initComponent.apply(this, arguments);
     } else {
 			// User not logged in, go to authorizeUser view
 			var client_id = '9vjs6vdesogbvnrv6uoal3ufh9';
@@ -27,9 +24,9 @@ rsvpBuddy.views.Viewport = Ext.extend(Ext.Panel, {
 		            ]
 		        });
 
-		        rsvpBuddy.views.Viewport.superclass.initComponent.apply(this, arguments);
+		        
 				
 				}
 }
-
+rsvpBuddy.views.Viewport.superclass.initComponent.apply(this, arguments);
 }});
